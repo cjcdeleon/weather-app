@@ -1,6 +1,8 @@
 import { useLazyGetWeatherByCityQuery } from "./app/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { selectCity, updateCity } from "./app/appSlice"
+import JsonView from "@uiw/react-json-view"
+import {vscodeTheme} from "@uiw/react-json-view/vscode";
 
 const App = () => {
   const city = useSelector(selectCity)
@@ -16,9 +18,18 @@ const App = () => {
         />
         <button onClick={() => getWeatherByCity(city)}>Get weather</button>
       </div>
-      <div>
-        {city}-{JSON.stringify(result)}
-      </div>
+      <br />
+      {result?.data?.city &&
+        (<div>
+          <JsonView value={result?.data?.city} style={vscodeTheme} />
+        </div>)
+      }
+      <br />
+      {result?.data?.weather &&
+        (<div>
+          <JsonView value={result?.data?.weather} style={vscodeTheme} />
+        </div>)
+      }
     </div>
   )
 }

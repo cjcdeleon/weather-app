@@ -11,9 +11,9 @@ app.use(cors());
 const port = process.env.PORT || 3000;
 const apiKey = process.env.APIKEY;
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/weather/:cityName", async (req: Request, res: Response) => {
     try {
-        const { cityName } = req.query;
+        const { cityName } = req.params;
         const responseCity = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`);
         const city = responseCity.data;
         const responseWeather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${city[0].lat}&lon=${city[0].lon}&&appid=${apiKey}`);
