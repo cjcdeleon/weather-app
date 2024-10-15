@@ -1,11 +1,10 @@
-import "./App.css"
-import {useGetWeatherByCityQuery} from "./app/apiSlice";
+import { useGetWeatherByCityMutation, useGetWeatherByCityQuery } from "./app/apiSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { selectCity, updateCity } from "./app/appSlice"
 
 const App = () => {
   const city = useSelector(selectCity)
-  const {data} = useGetWeatherByCityQuery(city)
+  const  [getWeatherByCity, result]  = useGetWeatherByCityMutation()
   const dispatch = useDispatch()
   return (
     <div className="App">
@@ -15,9 +14,10 @@ const App = () => {
                value={city}
                onChange={(v) => dispatch(updateCity(v.target.value))}
         />
+        <button onClick={() => getWeatherByCity({cityName: city})}>Get weather</button>
       </div>
       <div>
-        {city}-{JSON.stringify(data)}
+        {city}-{JSON.stringify(result)}
       </div>
     </div>
   )
