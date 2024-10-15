@@ -1,14 +1,17 @@
 // src/index.ts
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+const cors = require('cors');
 
 dotenv.config();
 
 const app: Express = express();
+app.use(cors());
 const port = process.env.PORT || 3000;
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Express + TypeScript Server Carlos");
+    console.log(`Express + TypeScript Server Carlos ${req.query.name}`)
+    res.send({test:`Express + TypeScript Server Carlos ${req.query.name}`});
 });
 
 app.listen(port, () => {
