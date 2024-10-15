@@ -11,9 +11,12 @@ export const weatherApi = createApi({
         getWeatherByCity: builder.query<any, string>({
             query: (cityName) => `/${cityName}`,
         }),
+        getWeatherHistoryByCity: builder.query<any, string>({
+            query: (cityName) => `/history/${cityName}`,
+        }),
     }),
 })
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useLazyGetWeatherByCityQuery } = weatherApi
+export const { useLazyGetWeatherByCityQuery, useLazyGetWeatherHistoryByCityQuery } = weatherApi
