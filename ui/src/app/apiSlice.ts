@@ -8,17 +8,12 @@ export const weatherApi = createApi({
             baseUrl: 'http://localhost:3000'
         }),
     endpoints: (builder) => ({
-        getWeatherByCity: builder.mutation<{ test:string;}, { cityName: string}>({
-            query: (body) => {
-                return {
-                    method: 'POST',
-                    body,
-                }
-            },
+        getWeatherByCity: builder.query<any, string>({
+            query: (name) => `?cityName=${name}`,
         }),
     }),
 })
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetWeatherByCityMutation } = weatherApi
+export const { useLazyGetWeatherByCityQuery } = weatherApi
