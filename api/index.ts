@@ -11,11 +11,22 @@ app.use(cors());
 const port = process.env.PORT || 3000;
 const apiKey = process.env.APIKEY;
 
+/*
 const getCityData = async (req: Request) => {
     const { cityName } = req.params;
     const responseCity = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`);
     return responseCity.data;
 }
+ */
+
+const getCityData = async (req: Request) => {
+    const { cityName } = req.params;
+    const responseCity = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`);
+    const city = await responseCity.json();
+    console.log(city)
+    return city;
+}
+
 app.get("/weather/:cityName", async (req: Request, res: Response) => {
     try {
         const responseCity = await getCityData(req);
