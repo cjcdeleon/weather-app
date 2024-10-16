@@ -5,7 +5,8 @@ export const weatherApi = createApi({
     reducerPath: 'weatherApi',
     baseQuery: fetchBaseQuery(
         {
-            baseUrl: 'http://localhost:3000/weather'
+            // baseUrl: 'http://localhost:3000/weather'
+            baseUrl: 'https://yjoy36bqti.execute-api.ap-southeast-2.amazonaws.com/weather'
         }),
     endpoints: (builder) => ({
         getWeatherByCity: builder.query<any, string>({
